@@ -1,7 +1,7 @@
 package app;
 import java.io.*;
 import java.util.*;
-import multiply.Multiply;
+import multiply.*;
 
 public class Main {
 
