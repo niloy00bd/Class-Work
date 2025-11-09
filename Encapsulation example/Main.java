@@ -28,5 +28,8 @@ public class Main {
         System.out.println("Name=> " + p.getName());
         p.setName("Niloy", -1);
         System.out.println("Name=> " + p.getName());
+        Programmer p2 = new Programmer();
+        p2.setName("Niloyyyy", -1);
+        System.out.println("Name=> " + p2.getName());
     }
 }
