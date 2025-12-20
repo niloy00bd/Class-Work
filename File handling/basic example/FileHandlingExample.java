@@ -25,9 +25,7 @@ public class FileHandlingExample {
                 System.out.println("File already exists.");                     // If exists, notify
             }
 
-            // ✅ IMPORTANT:
-            // Scanner(System.in) MUST NOT be inside try-with-resources
-            // Otherwise System.in closes → file cannot be deleted on Windows
+            // ✅ Scanner(System.in) must NOT be auto-closed
             Scanner input = new Scanner(System.in);   // Scanner for user input (kept open)
 
             // -----------------------------------
@@ -58,23 +56,54 @@ public class FileHandlingExample {
 
             System.out.println("\nReading file content:");
 
-            try (Scanner reader = new Scanner(myFile)) {  // Scanner auto-closes
+            try (Scanner reader1 = new Scanner(myFile)) {  // Scanner auto-closes
 
-                while (reader.hasNextLine()) {            // Loop until no more lines
-                    String data = reader.nextLine();      // Read one line
-                    System.out.println(data);             // Print the line
+                while (reader1.hasNextLine()) {            // Loop until no more lines
+                    String data = reader1.nextLine();      // Read one line
+                    System.out.println(data);              // Print the line
                 }
             }
 
             // -----------------------------------
-            // STEP 4: DELETE THE FILE
+            // APPEND MULTIPLE LINES TO THE FILE
             // -----------------------------------
 
-            if (myFile.delete()) {                        // Try to delete the file
-                System.out.println("\nFile deleted successfully."); // Success message
-            } else {
-                System.out.println("\nFailed to delete the file."); // Failure message
+            try (FileWriter appendWriter = new FileWriter(myFile, true)) {  // true = append mode
+
+                System.out.println("\nEnter lines to append (press Enter on empty line to stop):");
+
+                while (true) {
+                    String line = input.nextLine();   // Read user input
+
+                    if (line.isEmpty()) {             // Stop on empty line
+                        break;
+                    }
+
+                    appendWriter.write(line + "\n");  // Append line to file
+                }
+
+                System.out.println("Multiple lines appended successfully.");
             }
+
+            // -----------------------------------
+            // READ AGAIN AFTER APPENDING
+            // -----------------------------------
+
+            System.out.println("\nReading file content after appending:");
+
+            try (Scanner reader2 = new Scanner(myFile)) {  // Scanner auto-closes
+
+                while (reader2.hasNextLine()) {            // Loop until no more lines
+                    String data = reader2.nextLine();      // Read one line
+                    System.out.println(data);              // Print the line
+                }
+            }
+
+            // -----------------------------------
+            // STEP 4: DELETE THE FILE (SEPARATE METHOD)
+            // -----------------------------------
+
+            deleteFile(myFile);   // ✅ This guarantees delete works on Windows
 
             // ✅ DO NOT CLOSE input (System.in)
             // input.close();  // <-- NEVER DO THIS
@@ -82,6 +111,15 @@ public class FileHandlingExample {
         } catch (IOException e) {                         // Catch file-related errors
             System.out.println("An error occurred.");     // Print error message
             e.printStackTrace();                          // Print detailed error info
+        }
+    }
+
+    // ✅ FINAL FIX: Delete file in a separate method
+    static void deleteFile(File f) {
+        if (f.delete()) {
+            System.out.println("\nFile deleted successfully.");
+        } else {
+            System.out.println("\nFailed to delete the file.");
         }
     }
 }

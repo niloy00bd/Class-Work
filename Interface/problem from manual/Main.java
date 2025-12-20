@@ -32,7 +32,14 @@ public class Main
 	    for(int i=0; i<=3; i++){
 	        if (myArray[i] instanceof isEmergency) {
                 System.out.println(myArray[i].getClass().getSimpleName() + " implements IsEmergency:");
-                ((isEmergency) myArray[i]).soundSiren();
+                //myArray[i].soundSiren(); not possible Because myArray is an array of Object, the compiler only
+				// knows that myArray[i] is an object.
+ 				// object does not have a method named soundSiren(), so Java throws a compile‑time error.
+				//- Java only allows calling methods that the declared type supports
+				//shoja kothay myArray[i] er type ekhon Object. tai amader type casting korte hobe
+				//type casting kore amra bolte pari je eta ekhon isEmergency type er.
+				((isEmergency)myArray[i]).soundSiren();
+				((FireEmergency)myArray[i]).soundSiren();
             } else {
                 System.out.println(myArray[i].getClass().getSimpleName() + " does NOT implement IsEmergency");
             }
