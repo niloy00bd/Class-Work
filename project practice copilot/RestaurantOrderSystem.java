@@ -1,13 +1,8 @@
 // Import Swing classes for GUI components (JFrame, JPanel, JButton, JComboBox, etc.)
-import javax.swing.*; // GUI toolkit for desktop apps
-// Import AWT classes for drawing and layout (Graphics, Color, Layout managers)
-import java.awt.*; // Low-level drawing and component layout
-// Import event packages for handling actions and mouse events
-import java.awt.event.*; // ActionListener, MouseAdapter, MouseEvent
-// Import IO classes for binary file read/write
-import java.io.*; // FileInputStream, FileOutputStream, DataInputStream, DataOutputStream, IOException, EOFException
-// Import utility classes (Arrays used for convenience)
-import java.util.*; // General utilities
+import java.awt.*; // GUI toolkit for desktop apps
+import java.awt.event.*; // Low-level drawing and component layout
+import java.io.*; // ActionListener, MouseAdapter, MouseEvent
+import javax.swing.*; // FileInputStream, FileOutputStream, DataInputStream, DataOutputStream, IOException, EOFException
 
 // Main application window class; extends JFrame to create the app window
 public class RestaurantOrderSystem extends JFrame { // Application class
@@ -138,7 +133,7 @@ public class RestaurantOrderSystem extends JFrame { // Application class
 
         gbc.gridx = 0; gbc.gridy = 0; controlPanel.add(new JLabel("Menu:"), gbc); // Menu label
         //• 	এখানে একটি JLabel ("Menu:") panel-এ বসানো হচ্ছে।
-        //• 	এখানে  হলো সেই লেখা যা ইউজারকে দেখানো হবে।
+        //• 	এখানে ("Menu:") হলো সেই লেখা যা ইউজারকে দেখানো হবে।
         //• 	JLabel শুধু টেক্সট বা আইকন প্রদর্শন করে, ইউজার এটাতে কিছু লিখতে বা পরিবর্তন করতে পারে না।
         //• 	তাই এটা মূলত নাম/লেবেল হিসেবে কাজ করে — যেমন "Menu:", "Qty:", "Table:" ইত্যাদি।
         //• 	gbc.gridx = 0; → column 0
