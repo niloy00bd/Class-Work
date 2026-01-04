@@ -37,6 +37,8 @@ public class StudentMarksTest {
 
     // This is the main method — the entry point of the program
     public static void main(String[] args) {
+    //public static void main(String[] args)  throws InvalidMarksException{ 
+    //evabe diye try catch dileo hobe na dileo hobe
 
         // Start of try block to catch exceptions
         try {
@@ -47,13 +49,14 @@ public class StudentMarksTest {
 
             // Calling checkMarks with a valid value (85)
             // This will print "Valid marks: 85"
-            checkMarks(85);
+            checkMarks(85);//jehetu uporer line e exception peye jabe tai eta r check korbena. er agei ber hoye jabe
 
         } catch (InvalidMarksException e) {
 
             // This block runs when InvalidMarksException is thrown
             // It prints the exception message
             System.out.println("Exception caught: " + e.getMessage());
+            //System.out.println("Exception caught: " + e);
         }
     }
 }
